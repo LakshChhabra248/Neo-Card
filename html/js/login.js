@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // "Sign Up" Link (Placeholder)
     const signUpLink = document.querySelector('.sign-up');
     signUpLink.addEventListener('click', function(event) {
-        event.preventDefault(); 
-        alert('Sign Up functionality not yet implemented.'); 
+        window.open("https://forms.gle/uo7H9cZUVVn2ReWw9", "_blank")
     });
 });

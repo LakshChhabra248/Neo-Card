@@ -6,5 +6,5 @@ signIn.addEventListener('click', () => {
 })
 
 signUp.addEventListener('click', () => {
-    window.location.href = "https://forms.gle/uo7H9cZUVVn2ReWw9"
+    window.open("https://forms.gle/uo7H9cZUVVn2ReWw9", "_blank")
 })
