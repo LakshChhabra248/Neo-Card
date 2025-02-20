@@ -111,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Authentication
         if (authenticate(selectedCategory, loginId, password)) {
+            // Store loginId in localStorage
+            if(selectedCategory == "student"){
+                localStorage.setItem('loginId', loginId);
+            }
             // Successful login, redirect
             redirectToPage(selectedCategory);
         } else {
