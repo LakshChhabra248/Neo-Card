@@ -62,7 +62,7 @@ function decreaseQuantity(itemName) {
 }
 
 async function fetchItemImage(itemElement, itemName) {
-    const unsplashApiKey = "aQKqW83H84bIhsrU88IMzx8G7soVsIZUL2M3HHSAPN8"; // Replace with your Unsplash API key!
+    const unsplashApiKey = "9UI8cjbEFSSR80yogy5M6xeJMLljqSBdrV2NQMQkNdY"; // Replace with your Unsplash API key!
     const apiUrl = `https://api.unsplash.com/photos/random?query=${itemName}&client_id=${unsplashApiKey}`;
 
     try {
