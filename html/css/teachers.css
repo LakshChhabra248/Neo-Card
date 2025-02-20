@@ -1,0 +1,223 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    overflow-x: hidden;  /* Prevents horizontal scroll */
+}
+
+/* Navigation Bar (Fixed Top, Google-like) */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Subtle Shadow */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;  /* Space between logo, menu, search, and user */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar-logo img {
+    height: 40px;
+}
+
+.navbar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navbar-menu li {
+    margin: 0 15px;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: white;
+}
+
+.navbar-link.active {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-search {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.navbar-search input[type="text"] {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+    width: 200px;
+    transition: width 0.3s ease;
+}
+
+.navbar-search input[type="text"]:focus {
+    width: 250px;
+    outline: none;
+}
+
+.navbar-user img {
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Content Area (Main Layout) */
+.content-area {
+    display: flex;
+    margin-top: 70px; /* Account for fixed navbar */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+/* Side Menu (Vertical, Google-like) */
+.side-menu {
+    width: 200px;
+    background-color: white;
+    padding: 20px 0;
+    border-radius: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu li {
+    margin-bottom: 5px;
+}
+
+.side-menu-link {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 12px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.side-menu-link:hover {
+    background-color: #eee;
+    color: #007bff;
+}
+
+.side-menu-link.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+/* Main Content (Slides) */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.slide {
+    display: none;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide h1 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Dashboard (Overview) */
+.dashboard-overview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;  /* Distribute cards */
+}
+
+.dashboard-card {
+    width: calc(50% - 10px); /* Two cards per row with spacing */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* Attendance Controls */
+#attendance-controls {
+    margin-bottom: 20px;
+}
+#attendance-controls label, #grades-controls label {
+    margin-right: 10px;
+}
+
+#attendance-controls select, #grades-controls select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+#attendance-controls button, #communication-options button, #report-options button{
+   padding: 10px 15px;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   margin-right: 10px;
+   transition: background-color 0.3s ease;
+}
+#attendance-controls button:hover, #communication-options button:hover, #report-options button:hover {
+  background-color: #0056b3;
+}
+/* Grades Controls */
+#grades-controls {
+  margin-bottom: 20px;
+}
+
+/*  Communication */
+.communication-options {
+    margin-bottom: 20px;
+}
+/* Reports Options*/
+.report-options{
+   margin-bottom: 20px;
+}
