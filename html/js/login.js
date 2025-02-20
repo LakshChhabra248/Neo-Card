@@ -7,16 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Category Box Click Handlers
     categoryBoxes.forEach(box => {
         box.addEventListener('click', function() {
-            // Remove 'active' class from all boxes
+        
             categoryBoxes.forEach(b => b.classList.remove('active'));
-            // Add 'active' class to the clicked box
+         
             this.classList.add('active');
         });
     });
 
     // Login Form Submission
     loginForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission (page reload)
+        event.preventDefault(); 
 
         const loginId = document.getElementById('loginId').value;
         const password = document.getElementById('password').value;
@@ -28,19 +28,19 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Placeholder for login logic (replace with your actual login process)
+
         console.log("Logging in:", { category: selectedCategory, loginId: loginId, password: password });
 
     });
 
-    // "Forgot Password" Link (Placeholder)
+    // "Forgot Password" Link 
     const forgotPasswordLink = document.querySelector('.forgot-password');
     forgotPasswordLink.addEventListener('click', function(event) {
         event.preventDefault(); 
         alert('Forgot Password functionality not yet implemented.'); 
     });
 
-    // "Sign Up" Link (Placeholder)
+    // "Sign Up" Link 
     const signUpLink = document.querySelector('.sign-up');
     signUpLink.addEventListener('click', function(event) {
         event.preventDefault(); 
