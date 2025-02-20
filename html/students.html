@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Page</title>
+    <link rel="stylesheet" href="css/students.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="neocard_logo.png" alt="NeoCard Logo">
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="#" class="navbar-link">Home</a></li>
+                <li><a href="#" class="navbar-link active">Student</a></li>
+                <li><a href="#" class="navbar-link">School</a></li>
+                <li><a href="#" class="navbar-link">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+        <!-- Side Menu (Vertical) -->
+        <aside class="side-menu">
+            <ul>
+                <li><a href="#personal-data" class="side-menu-link active">Personal Details</a></li>
+                <li><a href="#attendance" class="side-menu-link">Attendance</a></li>
+                <li><a href="#marksheet" class="side-menu-link">Marksheet</a></li>
+                <li><a href="#school-fees" class="side-menu-link">School Fees</a></li>
+                <li><a href="#transactions" class="side-menu-link">Transactions</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content (Student Data) -->
+        <main class="main-content">
+            <section id="personal-data" class="slide active">
+                <h1>Personal Details</h1>
+                <div class="personal-details-container">  <!-- Container for Horizontal Layout -->
+                    <div class="student-photo">
+                        <img src="html/assets/images/DALL·E 2025-02-20 17.32.19 - A realistic image of an Indian child wearing a school uniform with an ID card. The ID card has 'NeoCard' written on it. The child is standing confiden.webp" alt="Student Photo">
+                    </div>
+                    <div class="personal-details-content">
+                        <div class="data-row">
+                            <div class="data-label">Name:</div>
+                            <div class="data-value" id="studentName">John Doe</div>
+                        </div>
+                        <div class="data-row">
+                            <div class="data-label">Class:</div>
+                            <div class="data-value" id="studentClass">10th</div>
+                        </div>
+                        <div class="data-row">
+                            <div class="data-label">Roll No.:</div>
+                            <div class="data-value" id="rollNumber">12345</div>
+                        </div>
+                        <div class="data-row">
+                            <div class="data-label">School Name:</div>
+                            <div class="data-value" id="schoolName">Example High School</div>
+                        </div>
+                        <div class="data-row">
+                            <div class="data-label">Father's Name:</div>
+                            <div class="data-value" id="fatherName">Michael Doe</div>
+                        </div>
+                        <div class="data-row">
+                            <div class="data-label">Mother's Name:</div>
+                            <div class="data-value" id="motherName">Jane Doe</div>
+                        </div>
+                        <div class="data-row">
+                            <div class="data-label">Contact Details:</div>
+                            <div class="data-value" id="contactDetails">
+                                Phone: 555-123-4567<br>
+                                Email: john.doe@example.com
+                            </div>
+                        </div>
+                        <div class="data-row">
+                            <div class="data-label">Year of Admission:</div>
+                            <div class="data-value" id="admissionYear">2020</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="attendance" class="slide">
+                <h1>Attendance</h1>
+                <div id="attendanceDisplay">
+                    <p>Loading attendance data...</p>
+                </div>
+            </section>
+
+            <section id="marksheet" class="slide">
+                <h1>Marksheet</h1>
+                <div id="marksheetDisplay">
+                    <p>Loading marksheet data...</p>
+                </div>
+            </section>
+
+            <section id="school-fees" class="slide">
+                <h1>School Fees</h1>
+                <div id="feesDisplay">
+                    <p>Loading fees data...</p>
+                </div>
+            </section>
+
+            <section id="transactions" class="slide">
+                <h1>Canteen/Stationary Transactions</h1>
+                <div id="transactionsDisplay">
+                    <p>Loading transaction data...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/students.js"></script>
+</body>
+</html>

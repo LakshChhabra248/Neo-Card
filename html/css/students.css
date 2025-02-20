@@ -1,0 +1,209 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Navigation Bar (Same as before) */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar-logo img {
+    height: 40px;
+}
+
+.navbar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navbar-menu li {
+    margin: 0 15px;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: white;
+}
+
+.navbar-link.active {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-search {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.navbar-search input[type="text"] {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+    width: 200px;
+    transition: width 0.3s ease;
+}
+
+.navbar-search input[type="text"]:focus {
+    width: 250px;
+    outline: none;
+}
+
+.navbar-user img {
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Content Area (Main Layout) */
+.content-area {
+    display: flex;
+    margin-top: 70px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+/* Side Menu (Vertical) */
+.side-menu {
+    width: 200px;
+    background-color: white;
+    padding: 20px 0; /* Remove the padding from the content area */
+    border-radius: 0; /* Remove the border radius to touch the corner */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    position: sticky;
+    top: 70px;  /* Start the SideMenu right after the Nav bar */
+    align-self: flex-start;
+    border: none; /* Add a border to the left */
+    height: calc(100vh - 70px); /* Make the sidemenu to fill the height after the navbar */
+    overflow-y: auto;
+}
+.side-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.side-menu li {
+  margin-bottom: 5px;
+}
+
+.side-menu-link {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 12px 20px;
+    border-radius: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.side-menu-link:hover {
+    background-color: #eee;
+    color: #007bff;
+}
+
+.side-menu-link.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+/* Main Content (Student Data) */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Slides */
+.slide {
+    display: none;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide h1 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Personal Details (Horizontal Layout) */
+.personal-details-container {
+    display: flex;
+    align-items: center; /* Vertically center content */
+    /* Add a margin at the bottom */
+    margin-bottom: 20px;
+}
+
+.student-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.student-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.personal-details-content {
+    flex-grow: 1; /* Allow content to take remaining space */
+}
+
+.data-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.data-label {
+    font-weight: bold;
+    width: 180px;
+    color: #555;
+}
+
+.data-value {
+    flex-grow: 1;
+    word-break: break-word;
+}
