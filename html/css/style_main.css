@@ -1,115 +1,70 @@
-/* General Styles */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #e5e1e1;
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    align-items: center;     
+    min-height: 100vh;       
 }
 
 
-.login-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;  
+.container {
+  width: 100%;         
+  max-width: 800px;      
+  padding: 20px;        
 }
 
-/* Login Card */
-.login-card {
-    background-color: #fff;
+/* Neo-Card Styles */
+.neo-card {
+    background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    width: 80%;
-    max-width: 400px;
+    padding: 40px;
     text-align: center;
+    width: 80%; 
+    max-width: 500px; 
 }
 
-.login-card h2 {
-    margin-bottom: 20px;
-    color: #333;
+.neo-card-title {
+    font-size: 3.5em;  
+    margin-bottom: 30px;
+    color: #3204ff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);  
 }
 
-/* Category Selection */
-.category-container {
+
+.button-container {
     display: flex;
     justify-content: space-around;  
-    margin-bottom: 20px;
+    margin-top: 30px;
 }
 
-.category-box {
-    padding: 12px 20px;
-    background-color: #eee;
+
+.sign-in-button, .sign-out-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex: 1; 
-    margin: 0 5px; 
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.category-box.active {
-    background-color: #4CAF50; /* Active category color */
+.sign-in-button {
+    background-color: #4CAF50;  /* Green */
+    color: rgb(255, 255, 255);
+}
+
+.sign-out-button {
+    background-color: #f44336; /* Red */
     color: white;
 }
 
-.category-box:hover:not(.active) {
-    background-color: #ddd;
+.sign-in-button:hover {
+    background-color: #3e8e41; /* Darker green */
 }
 
-/* Form Group */
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input[type="text"],
-.form-group input[type="password"] {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Login Button */
-.login-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-    background-color: #3e8e41;
-}
-
-/* Form Links (Forgot Password, Sign Up) */
-.form-links {
-    margin-top: 20px;
-    font-size: 0.9em;
-    text-align: center;
-}
-
-.form-links a {
-    color: #555;
-    text-decoration: none;
-}
-
-.form-links a:hover {
-    text-decoration: underline;
+.sign-out-button:hover {
+    background-color: #da190b; /* Darker red */
 }
