@@ -1,13 +1,27 @@
-// JavaScript Functionality
+// utilities.js (Using Unsplash API)
+// Requires an API key from Unsplash (https://unsplash.com/developers)
+// ==========================================================================
+//  IMPORTANT: Replace "YOUR_UNSPLASH_API_KEY" with your actual Unsplash API key.
+//  Be mindful of Unsplash's API usage guidelines and rate limits.
+// ==========================================================================
+
 let billItems = [];
-const apiKey = "YOUR_API_KEY"; // Replace with your actual API key - *NOT RECOMMENDED FOR PRODUCTION*
 
 // Function to set the image URL to the item element
-function setItemImageUrl(itemElement, imageUrl) {
+function setItemImageUrl(itemElement, imageUrl, photographerName = null, photographerUrl = null) {
     itemElement.dataset.imageUrl = imageUrl;
     const imgElement = itemElement.querySelector('.item-ai-image');
     if (imgElement) {
         imgElement.src = imageUrl;
+    }
+
+    // Handle Attribution (if Unsplash or another API requires it)
+    const attributionElement = itemElement.querySelector('.attribution');
+    if (attributionElement && photographerName && photographerUrl) {
+        attributionElement.innerHTML = `Photo by <a href="${photographerUrl}" target="_blank">${photographerName}</a> on <a href="https://unsplash.com" target="_blank">Unsplash</a>`;
+        attributionElement.style.display = 'block'; // Show the attribution
+    } else if (attributionElement) {
+        attributionElement.style.display = 'none'; // Hide the attribution if no info
     }
 }
 
@@ -47,34 +61,37 @@ function decreaseQuantity(itemName) {
     }
 }
 
-async function fetchItemImage(itemElement, itemName) { // Pass the itemName as argument
-    const apiUrl = `https://api.example.com/generate_image?prompt=${itemName}`;
+async function fetchItemImage(itemElement, itemName) {
+    const unsplashApiKey = "aQKqW83H84bIhsrU88IMzx8G7soVsIZUL2M3HHSAPN8"; // Replace with your Unsplash API key!
+    const apiUrl = `https://api.unsplash.com/photos/random?query=${itemName}&client_id=${unsplashApiKey}`;
 
     try {
-        const response = await fetch(apiUrl, {
-            method: 'GET', // Or POST, depending on the API
-            headers: {
-                'Authorization': `Bearer ${apiKey}`  // Add API key to header
-            }
-        });
+        const response = await fetch(apiUrl);
 
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            console.error(`Unsplash API error: ${response.status} - ${response.statusText}`);
+            setItemImageUrl(itemElement, "placeholder.png"); // Fallback on error
+            return; // Exit the function
         }
 
-        const data = await response.json();  // Assuming the API returns JSON
+        const data = await response.json();
 
-        // Assuming the API response contains an image URL
-        const imageUrl = data.imageUrl;
+        if (data && data.urls && data.urls.regular) {
+            const imageUrl = data.urls.regular;  // Or 'small', 'thumb', etc.
+            const photographerName = data.user.name;
+            const photographerUrl = data.user.links.html;
 
-        setItemImageUrl(itemElement, imageUrl);
+            setItemImageUrl(itemElement, imageUrl, photographerName, photographerUrl);
+        } else {
+            console.warn("No image URL found in Unsplash response.");
+            setItemImageUrl(itemElement, "placeholder.png");
+        }
+
     } catch (error) {
-        console.error("Error fetching image:", error);
-        // Handle the error (e.g., display a placeholder image)
-        setItemImageUrl(itemElement, "placeholder.png"); // Use a default image
+        console.error("Error fetching image from Unsplash:", error);
+        setItemImageUrl(itemElement, "placeholder.png");
     }
 }
-
 
 function updateBill() {
     const billItemsContainer = document.getElementById('bill-items');
