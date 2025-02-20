@@ -4,3 +4,7 @@ const signUp = document.getElementById('sign-up-button')
 signIn.addEventListener('click', () => {
     window.location.href = "html/login.html"
 })
+
+signUp.addEventListener('click', () => {
+    window.location.href = "https://forms.gle/uo7H9cZUVVn2ReWw9"
+})
