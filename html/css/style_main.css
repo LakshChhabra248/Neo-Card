@@ -42,7 +42,7 @@ body {
 }
 
 
-.sign-in-button, .sign-out-button {
+#sign-in-button, #sign-up-button {
     padding: 15px 30px;
     font-size: 1.2em;
     border: none;
@@ -51,20 +51,20 @@ body {
     transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.sign-in-button {
+#sign-in-button {
     background-color: #4CAF50;  /* Green */
     color: rgb(255, 255, 255);
 }
 
-.sign-out-button {
+#sign-up-button {
     background-color: #f44336; /* Red */
     color: white;
 }
 
-.sign-in-button:hover {
+#sign-in-button:hover {
     background-color: #3e8e41; /* Darker green */
 }
 
-.sign-out-button:hover {
+#sign-out-button:hover {
     background-color: #da190b; /* Darker red */
 }
