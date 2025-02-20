@@ -183,3 +183,10 @@ p {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
+
+.item-ai-image {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+}
