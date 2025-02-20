@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
 
     // *******************  XLSX File Paths (Update these!) *******************
-    const studentXLSX = 'data/students.xlsx';  //  Create this directory and file
-    const teacherXLSX = 'data/teachers.xlsx';    //  Create this directory and file
-    const utilitiesXLSX = 'data/utilities.xlsx'; //  Create this directory and file
+    const studentXLSX = 'js/data/students.xlsx';  //  Create this directory and file
+    const teacherXLSX = 'js/data/teachers.xlsx';    //  Create this directory and file
+    const utilitiesXLSX = 'js/data/utilities.xlsx'; //  Create this directory and file
 
     // ******************* Global Variables *******************
     let studentData = [];
