@@ -1,7 +1,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #e5e1e1;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@ body {
 
 /* Neo-Card Styles */
 .neo-card {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 40px;
@@ -30,7 +30,7 @@ body {
 .neo-card-title {
     font-size: 3.5em;  
     margin-bottom: 30px;
-    color: #333;
+    color: #3204ff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);  
 }
 
@@ -53,7 +53,7 @@ body {
 
 .sign-in-button {
     background-color: #4CAF50;  /* Green */
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .sign-out-button {
