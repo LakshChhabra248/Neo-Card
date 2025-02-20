@@ -1,4 +1,4 @@
-// student_page.js (Same as before)
+// students.js
 document.addEventListener('DOMContentLoaded', function() {
 
     // Function to hide all slides
@@ -46,19 +46,46 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActiveSideMenuLink('personal-data');
 
 
-    // Placeholder: Fetch and display student data
-    // Replace this with actual API calls to your backend
-    // and dynamic content population
-
-    // Example (replace with your actual data retrieval)
     function loadStudentData() {
-        //  Simulate fetching data from a backend
-        setTimeout(() => { // Simulate a network request
-            document.getElementById('studentName').textContent = "Alice Smith";
-            document.getElementById('rollNumber').textContent = "67890";
-            document.getElementById('studentClass').textContent = "10th";
-            // ... update other fields with real data
-        }, 1000); // Simulate 1 second delay
+        const studentXLSX = 'js/data/Students.xlsx'; // Path to your XLSX file
+        const loginId = localStorage.getItem('loginId'); // Retrieve loginId from localStorage
+
+        if (!loginId) {
+            alert('No login ID found. Please log in first.');
+            return;
+        }
+
+        fetch(studentXLSX)
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+                // Find the student with the matching loginId
+                const student = jsonData.find(student => String(student.loginId) === loginId);
+                console.log("Student Data",student)
+
+                if (student) {
+                    // Populate the HTML elements with the student's data
+                    document.getElementById('studentName').textContent = student.Name || 'N/A';
+                    document.getElementById('studentClass').textContent = student.Class || 'N/A';
+                    document.getElementById('rollNumber').textContent = student['Roll No.'] || 'N/A';
+                    document.getElementById('schoolName').textContent = student['School Name'] || 'N/A';
+                    document.getElementById('fatherName').textContent = student['Father\'s Name'] || 'N/A';
+                    document.getElementById('motherName').textContent = student['Mother\'s Name'] || 'N/A';
+                    document.getElementById('contactDetails').innerHTML = `Phone: ${student['Phone No.'] || 'N/A'}<br>Email: ${student['Email Id'] || 'N/A'}`;
+                } else {
+                    alert('Student data not found for login ID: ' + loginId);
+                }
+            })
+            .catch(error => {
+                console.error('Error reading XLSX file:', error);
+                alert('Error reading student data. Check console.');
+            });
+
+        localStorage.removeItem("loginId")
     }
 
     function loadAttendanceData() {
@@ -106,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         }, 1500); //Simulate a 1.5 second delay
     }
+
 
     loadStudentData();
     loadAttendanceData();
