@@ -19,6 +19,23 @@ function addToBill(itemName, itemPrice) {
     updateBill();
 }
 
+function decreaseQuantity(itemName) {
+    const existingItem = billItems.find(item => item.name === itemName);
+
+    if (existingItem) {
+        existingItem.quantity--;
+
+        if (existingItem.quantity <= 0) {
+            // Remove the item if quantity reaches zero
+            billItems = billItems.filter(item => item.name !== itemName);
+        } else {
+            existingItem.totalPrice = existingItem.quantity * existingItem.price;
+        }
+
+        updateBill();
+    }
+}
+
 function updateBill() {
     const billItemsContainer = document.getElementById('bill-items');
     const totalAmountSpan = document.getElementById('total-amount');
@@ -32,12 +49,22 @@ function updateBill() {
         billItemDiv.innerHTML = `
             <span>${item.name} (${item.quantity})</span>
             <span>₹${item.price.toFixed(2)} x ${item.quantity} = ₹${item.totalPrice.toFixed(2)}</span>
+            <button class="decrease-item" data-name="${item.name}">-</button>
         `;
         billItemsContainer.appendChild(billItemDiv);
         total += item.totalPrice;
     });
 
     totalAmountSpan.textContent = total.toFixed(2);
+
+    // Add event listeners to the decrease buttons *after* they are added to the DOM
+    const decreaseButtons = document.querySelectorAll('.decrease-item');
+    decreaseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const itemName = this.dataset.name;
+            decreaseQuantity(itemName);
+        });
+    });
 }
 
 function resetBill() {
