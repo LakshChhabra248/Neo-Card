@@ -107,26 +107,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
      //Event listeners for buttons (these actions need to be customized)
      document.getElementById('take-attendance-button').addEventListener('click', () => {
-         alert('Taking attendance for the selected class.  Replace with actual functionality.');
+         alert('Taking attendance for the selected class. To Be Added in future production.');
          //This will navigate to the student page
      });
 
     document.getElementById('post-announcement-button').addEventListener('click', () => {
-         alert('Posting an announcement. Replace with actual functionality.');
+         alert('Posting an announcement.To Be Added in future production.');
          //Open a modal, form or similar to create and post announcement
      });
 
      document.getElementById('send-message-button').addEventListener('click', () => {
-         alert('Sending a message. Replace with actual functionality.');
+         alert('Sending a message.To Be Added in future production.');
          //This will open a messaging interface.
      });
 
      document.getElementById('generate-attendance-report').addEventListener('click', () => {
-         alert('Generating attendance report. Replace with actual functionality.');
+         alert('Generating attendance report.To Be Added in future production.');
          //This will start the download of the report
      });
      document.getElementById('generate-performance-report').addEventListener('click', () => {
-         alert('Generating the performance report. Replace with actual functionality.');
+         alert('Generating the performance report.To Be Added in future production.');
          //This will start the download of the report
      });
 
