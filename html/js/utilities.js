@@ -1,9 +1,3 @@
-// utilities.js (Using Unsplash API)
-// Requires an API key from Unsplash (https://unsplash.com/developers)
-// ==========================================================================
-//  IMPORTANT: Replace "YOUR_UNSPLASH_API_KEY" with your actual Unsplash API key.
-//  Be mindful of Unsplash's API usage guidelines and rate limits.
-// ==========================================================================
 
 let billItems = [];
 
@@ -107,7 +101,7 @@ function updateBill() {
         billItemDiv.innerHTML = `
             <span>${item.name} (${item.quantity})</span>
             <span>₹${item.price.toFixed(2)} x ${item.quantity} = ₹${item.totalPrice.toFixed(2)}</span>
-            <button class="decrease-item" data-name="${item.name}">-</button>
+            <button class="minus-button decrease-item" data-name="${item.name}">-</button>
         `;
         billItemsContainer.appendChild(billItemDiv);
         total += item.totalPrice;

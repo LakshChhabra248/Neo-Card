@@ -1,116 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Student Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
     <link rel="stylesheet" href="css/students.css">
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <img src="neocard_logo.png" alt="NeoCard Logo">
-            </div>
-            <ul class="navbar-menu">
-                <li><a href="#" class="navbar-link">Home</a></li>
-                <li><a href="#" class="navbar-link active">Student</a></li>
-                <li><a href="#" class="navbar-link">School</a></li>
-                <li><a href="#" class="navbar-link">About Us</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <div class="content-area">
-        <!-- Side Menu (Vertical) -->
-        <aside class="side-menu">
+    <header>
+        <h1>Neo Card</h1>
+        <nav>
             <ul>
-                <li><a href="#personal-data" class="side-menu-link active">Personal Details</a></li>
-                <li><a href="#attendance" class="side-menu-link">Attendance</a></li>
-                <li><a href="#marksheet" class="side-menu-link">Marksheet</a></li>
-                <li><a href="#school-fees" class="side-menu-link">School Fees</a></li>
-                <li><a href="#transactions" class="side-menu-link">Transactions</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Students</a></li>
+                <li><a href="#">School</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#" onclick="showContent('personalInfo')">Personal Info</a></li>
+                <li><a href="#" onclick="showContent('attendance')">Attendance</a></li>
+                <li><a href="#" onclick="showContent('marksheet')">Marksheet</a></li>
+                <li><a href="#" onclick="showContent('schoolFees')">School Fees</a></li>
+                <li><a href="#" onclick="showContent('transactions')">Transaction History</a></li>
+                <li><a href="#" onclick="showContent('neoCardRecharge')">NeoCard Recharge</a></li>
             </ul>
         </aside>
 
-        <!-- Main Content (Student Data) -->
-        <main class="main-content">
-            <section id="personal-data" class="slide active">
-                <h1>Personal Details</h1>
-                <div class="personal-details-container">  <!-- Container for Horizontal Layout -->
-                    <div class="student-photo">
-                        <img src="assets/images/DALL·E 2025-02-20 17.32.19 - A realistic image of an Indian child wearing a school uniform with an ID card. The ID card has 'NeoCard' written on it. The child is standing confiden.webp" alt="Student Photo">
-                    </div>
-                    <div class="personal-details-content">
-                        <div class="data-row">
-                            <div class="data-label">Name:</div>
-                            <div class="data-value" id="studentName">John Doe</div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-label">Class:</div>
-                            <div class="data-value" id="studentClass">10th</div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-label">Roll No.:</div>
-                            <div class="data-value" id="rollNumber">12345</div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-label">School Name:</div>
-                            <div class="data-value" id="schoolName">Example High School</div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-label">Father's Name:</div>
-                            <div class="data-value" id="fatherName">Michael Doe</div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-label">Mother's Name:</div>
-                            <div class="data-value" id="motherName">Jane Doe</div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-label">Contact Details:</div>
-                            <div class="data-value" id="contactDetails">
-                                Phone: 555-123-4567<br>
-                                Email: john.doe@example.com
-                            </div>
-                        </div>
-                        <div class="data-row">
-                            <div class="data-label">Year of Admission:</div>
-                            <div class="data-value" id="admissionYear">2020</div>
-                        </div>
-                    </div>
+        <main class="content">
+            <div id="personalInfo" class="content-box">
+                <h2>Personal Information</h2>
+                <div class="student-info">
+                    <img src="assets/images/DALL·E 2025-02-20 17.32.19 - A realistic image of an Indian child wearing a school uniform with an ID card. The ID card has 'NeoCard' written on it. The child is standing confiden.webp" alt="Student Image" class="student-image">
+                    <p class="student-name">Hi, Aditya</p>
                 </div>
-            </section>
+                <p><strong>Class:</strong> 10th</p>
+                <p><strong>Roll No:</strong> 21</p>
+                <p><strong>School Name:</strong> XYZ High School</p>
+                <p><strong>Father's Name:</strong> Rajesh Kumar</p>
+                <p><strong>Mother's Name:</strong> Sunita Devi</p>
+                <p><strong>Contact:</strong> 9876543210</p>
+                <p><strong>Year of Admission:</strong> 2018</p>
+            </div>
 
-            <section id="attendance" class="slide">
-                <h1>Attendance</h1>
-                <div id="attendanceDisplay">
-                    <p>Loading attendance data...</p>
+                <div id="attendance" class="content-box">
+                    <h2>Attendance</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Total Classes</th>
+                                <th>Classes Attended</th>
+                                <th>Classes Missed</th>
+                                <th>Absence Dates</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>50</td>
+                                <td>45</td>
+                                <td>5</td>
+                                <td>2025-01-10, 2025-01-15, 2025-01-20, 2025-01-25, 2025-01-30</td>
+                            </tr>
+                            <tr>
+                                <td>Science</td>
+                                <td>50</td>
+                                <td>48</td>
+                                <td>2</td>
+                                <td>2025-01-12, 2025-01-22</td>
+                            </tr>
+                            <tr>
+                                <td>English</td>
+                                <td>50</td>
+                                <td>49</td>
+                                <td>1</td>
+                                <td>2025-01-18</td>
+                            </tr>
+                            <tr>
+                                <td>History</td>
+                                <td>50</td>
+                                <td>47</td>
+                                <td>3</td>
+                                <td>2025-01-05, 2025-01-19, 2025-01-25</td>
+                            </tr>
+                            <tr>
+                                <td>Geography</td>
+                                <td>50</td>
+                                <td>46</td>
+                                <td>4</td>
+                                <td>2025-01-08, 2025-01-14, 2025-01-21, 2025-01-28</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </section>
+            </div>
 
-            <section id="marksheet" class="slide">
-                <h1>Marksheet</h1>
-                <div id="marksheetDisplay">
-                    <p>Loading marksheet data...</p>
-                </div>
-            </section>
+            <div id="marksheet" class="content-box">
+                <h2>Marksheet</h2>
+                <p>All last class marks will be displayed here.</p>
+            </div>
 
-            <section id="school-fees" class="slide">
-                <h1>School Fees</h1>
-                <div id="feesDisplay">
-                    <p>Loading fees data...</p>
-                </div>
-            </section>
+            <div id="schoolFees" class="content-box">
+                <h2>School Fees</h2>
+                <p>Fee details of all years will be displayed here.</p>
+            </div>
 
-            <section id="transactions" class="slide">
-                <h1>Canteen/Stationary Transactions</h1>
-                <div id="transactionsDisplay">
-                    <p>Loading transaction data...</p>
-                </div>
-            </section>
+            <div id="transactions" class="content-box">
+                <h2>Transaction History</h2>
+                <p>Canteen and stationery transactions will be shown here.</p>
+            </div>
+
+            <div id="neoCardRecharge" class="content-box">
+                <h2>NeoCard Recharge</h2>
+                <p>Recharge and payment details will be available here.</p>
+            </div>
         </main>
     </div>
+
 
     <script src="js/students.js"></script>
 </body>

@@ -9,7 +9,7 @@ body {
 
 /* Navigation Bar (Fixed Top, Google-like) */
 .navbar {
-    background-color: #333;
+    background-color: #2C3E50;
     color: white;
     padding: 15px 0;
     position: fixed;
@@ -88,7 +88,7 @@ body {
 /* Content Area (Main Layout) */
 .content-area {
     display: flex;
-    margin-top: 70px; /* Account for fixed navbar */
+    margin-top: 80px; /* Account for fixed navbar */
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
