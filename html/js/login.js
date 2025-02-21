@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     readXLSX(studentXLSX, (data) => { studentData = data; });
     readXLSX(teacherXLSX, (data) => { teacherData = data; });
     readXLSX(utilitiesXLSX, (data) => { utilitiesData = data; });
+    // Reading Data from Xlsx file
 
 
 
