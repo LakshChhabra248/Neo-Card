@@ -1,47 +1,78 @@
-# Neo-Card: Reimagine School IDs with NFC (MVP) - Coding Crusaders
+# Neo-Card: Reimagine School IDs with NFC - by Coding Crusaders
 
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Hackathon Submission](https://img.shields.io/badge/Hackathon-Submission-brightgreen)](https://github.com/LakshChhabra248/Neo-Card)
-[![Open Issues](https://img.shields.io/github/issues/LakshChhabra248/Neo-Card)](https://github.com/LakshChhabra248/Neo-Card/issues)
-[![Contributors](https://img.shields.io/github/contributors/LakshChhabra248/Neo-Card)](https://github.com/LakshChhabra248/Neo-Card/graphs/contributors)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
+[![Django Version](https://img.shields.io/badge/Django-4.x-green.svg)](https://www.djangoproject.com/)
+[![GitHub issues](https://img.shields.io/github/issues/LakshChhabra248/Neo-Card)](https://github.com/LakshChhabra248/Neo-Card/issues)
+[![GitHub contributors](https://img.shields.io/github/contributors/LakshChhabra248/Neo-Card)](https://github.com/LakshChhabra248/Neo-Card/graphs/contributors)
 
 <p align="center">
   <img src="https://i.imgur.com/YOUR_IMAGE_HERE.png" alt="Neo-Card Logo" width="300"/>
 </p>
 
-**Neo-Card (MVP)**, developed by Coding Crusaders, is transforming the traditional school ID into a smart, secure, and convenient NFC-enabled solution. We address the limitations of smart devices and UPI access in schools by providing a digital ID capable of payments, attendance tracking, and more.
+**Neo-Card** is an all-in-one smart campus solution that transforms the traditional school ID into a powerful NFC-enabled tool. Developed by **Coding Crusaders**, this project addresses the limitations of cash, smart devices, and UPI within school premises by creating a secure and seamless digital ecosystem.
 
-**🏆 Problem:**  Schools face challenges with secure payments, efficient attendance, and limited access control, often restricting smart devices and UPI.
+---
 
-**💡 Solution:** Neo-Card provides a unified NFC-based system, replacing traditional IDs with a smart, digital alternative.
+### 🏆 The Problem
 
-**🚀 MVP Focus:**  This Minimum Viable Product (MVP) showcases the core front-end design and user interface.  Backend integration and full NFC functionality are planned for future development.
+Schools today struggle with inefficient and outdated systems:
+*   **Cash Dependency:** Managing cash in canteens and stationery shops is cumbersome and prone to leakage.
+*   **Manual Attendance:** Teachers waste valuable class time on manual roll calls and report generation.
+*   **Security Gaps:** Limited access control and a lack of real-time student tracking pose safety concerns.
+*   **Lack of Transparency:** Parents have little to no visibility into their child's in-school activities and expenditures.
 
-## Key Features (MVP)
+### 💡 Our Solution: The Neo-Card Ecosystem
 
-*   ✅ Digital ID Card Display: Clear and accessible display of student information.
-*   🎨 Customizable Card Designs:  Branding and personalization options for a unique school identity.
-*   📱 Simulated NFC Interaction (Demo): Demonstrates the intended NFC interaction (actual NFC requires backend/hardware).
-*   ✨ User-Friendly Interface:  Intuitive and easy-to-use experience for students of all ages.
+Neo-Card replaces the traditional ID with a secure NFC card, connected to a powerful backend, creating a unified system for:
+*   **Cashless Payments:** Secure tap-and-go payments at canteens, stationery, and fee counters.
+*   **Automated Attendance:** Instant, error-free attendance marking at gates and classrooms.
+*   **Secure Access Control:** Controlled access to libraries, labs, and other restricted areas.
+*   **Real-time Parent Portal:** A dedicated portal for parents to monitor attendance, track spending, and top-up their child's account.
 
-## Future Impact
+---
 
-Neo-Card aims to revolutionize the school experience:
+### ✨ Core Features (What's Ready!)
 
-*   💰 NFC-Based Payments: Seamless and secure in-campus transactions, reducing reliance on cash.
-*   ⏱️ Automated Attendance:  Efficient check-in/check-out, saving time and improving accuracy.
-*   🔒 Secure Access Control:  Restricted access to authorized areas, enhancing campus safety.
-*   👪 Parental Controls:  Empower parents to manage spending and track transactions.
-*   ☁️ Scalable Backend:  Robust backend for data management, security, and scalability across schools.
+This repository contains a fully functional prototype showcasing the power of Neo-Card.
 
-## Getting Started
+*   ✅ **Robust Django Backend:** The core of our system, built with Django, handles all data management, user authentication, and transaction logic securely.
+*   💻 **Intuitive Web Portals:** Fully developed web interfaces for:
+    *   **Admin Dashboard:** For school management to get a complete overview.
+    *   **Parent Portal:** For parents to track their child's activities and manage their account.
+    *   **Teacher's View:** For simplified class management.
+*   🚀 **Live Hardware Demo with Streamlit:** An interactive Streamlit application that connects to a physical NFC card reader to demonstrate **real-time payment deduction** from a student's account. This shows our hardware-software integration capabilities.
+*   🔒 **Secure & Scalable:** Designed from the ground up with security and scalability in mind, ready to be deployed in a real-world school environment.
 
-Easy setup to explore the Neo-Card MVP:
+---
 
-### Prerequisites
+### 🚀 Live Demo & Getting Started
 
-*   [Node.js](https://nodejs.org/en/download/) (v16+)
-*   [npm](https://www.npmjs.com/get-npm)
+Explore the power of Neo-Card by setting up our project and running the live hardware demo.
 
+#### **Prerequisites**
 
-Made with 💕 by Coding Crusaders
+*   Python (3.9+)
+*   Django (4.x) & other dependencies from `requirements.txt`
+*   Streamlit
+*   A compatible NFC Card Reader (e.g., ACR122U)
+
+#### **1. Backend Setup (Django)**
+
+```bash
+# Clone the repository
+git clone https://github.com/LakshChhabra248/Neo-Card.git
+cd Neo-Card
+
+# Create a virtual environment and activate it
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run database migrations
+python manage.py migrate
+
+# Start the development server
+python manage.py runserver
