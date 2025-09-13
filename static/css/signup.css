@@ -1,0 +1,145 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.signup-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px; /* Thoda chauda container */
+    overflow: hidden; /* For rounded corners */
+}
+
+.signup-header {
+    background-color: #4a90e2; /* A nice blue header */
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+.signup-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.signup-form {
+    padding: 30px;
+}
+
+/* For displaying messages from backend */
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    text-align: center;
+    color: #d9534f; /* Red for errors */
+    font-weight: 500;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex-basis: 48%; /* Ek row mein do items */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    flex-basis: 100%; /* For single item rows */
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 95%; /* Adjust width to account for padding */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #5cb85c; /* Green for success */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.signup-button:hover {
+    background-color: #4cae4c;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #777;
+}
+
+.login-link a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.form-group select {
+    width: 100%; /* Full width to match input */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white; /* Ensure background is white */
+}
+
+.password-container {
+    position: relative; /* Yeh zaroori hai taaki icon ko iske andar position kar sakein */
+}
+
+.password-container .toggle-password-icon {
+    position: absolute;
+    right: 10px; /* Right se thodi doori */
+    top: 50%;   /* Upar se 50% neeche */
+    transform: translateY(-50%); /* Isse bilkul vertically center mein aa jayega */
+    cursor: pointer;
+    user-select: none; /* Taaki icon select na ho */
+    font-style: normal; /* Emoji ko aacha dikhane ke liye */
+}
+
+/* Signup page ke liye thoda adjustment, kyunki usme label bhi hai */
+.signup-form .password-container .toggle-password-icon {
+    top: 70%; /* Isko thoda aur neeche kar do */
+}

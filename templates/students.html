@@ -1,0 +1,154 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/students.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>Neo Card</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Students</a></li>
+                <li><a href="#">School</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="{% url 'logout' %}" style="color: #ffb3b3; font-weight: bold;">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#" onclick="showContent('personalInfo')">Personal Info</a></li>
+                <li><a href="#" onclick="showContent('attendance')">Attendance</a></li>
+                <li><a href="#" onclick="showContent('marksheet')">Marksheet</a></li>
+                <li><a href="#" onclick="showContent('schoolFees')">School Fees</a></li>
+                <li><a href="#" onclick="showContent('transactions')">Transaction History</a></li>
+                <li><a href="#" onclick="showContent('neoCardRecharge')">NeoCard Recharge</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <div id="personalInfo" class="content-box">
+                <h2>Personal Information</h2>
+                <div class="student-info">
+                    <img src="{% static 'assets/images/DALL·E 2025-02-20 17.32.19 - A realistic image of an Indian child wearing a school uniform with an ID card. The ID card has \'NeoCard\' written on it. The child is standing confiden.webp' %}"
+                        alt="Student Image" class="student-image">
+                    <!-- Data ab backend se aa raha hai -->
+                    <p class="student-name">Hi, {{ student.name }}</p>
+                </div>
+                <p><strong>Class:</strong> <span>{{ student.student_class }}</span></p>
+                <p><strong>Roll No:</strong> <span>{{ student.roll_no }}</span></p>
+                <p><strong>School Name:</strong> <span>{{ student.school_name }}</span></p>
+                <p><strong>Father's Name:</strong> <span>{{ student.father_name }}</span></p>
+                <p><strong>Mother's Name:</strong> <span>{{ student.mother_name }}</span></p>
+                <p><strong>Contact:</strong> <span>{{ student.phone_no }}</span></p>
+                <p><strong>Email ID:</strong> <span>{{ student.email_id }}</span></p>
+
+                <a href="{% url 'update_profile' %}"
+                    style="display: inline-block; margin-top: 20px; padding: 10px 15px; background-color: #4a90e2; color: white; text-decoration: none; border-radius: 5px;">
+                    Update Profile
+                </a>
+            </div>
+
+            <div id="transactions" class="content-box">
+                <!-- Current Balance yahan dikha do -->
+                <h2>Transaction History</h2>
+                <h4 style="text-align: right; margin-top: -30px;">Current Balance: ₹{{ student.balance }}</h4>
+
+                {% if transactions %}
+                {% regroup transactions by object.timestamp.date as transactions_by_date %}
+
+                {% for group in transactions_by_date %}
+                <div class="transaction-day-group">
+                    <h3 class="transaction-date">{{ group.grouper|date:"d M Y" }}</h3>
+
+                    {% for trx_data in group.list %}
+                    <!-- 'trx_data' ab ek dictionary hai jisme 'object' aur 'type' hai -->
+                    <!-- Hum yahan 'trx_data.type' ke hisaab se CSS class badlenge -->
+                    <div class="transaction-card {{ trx_data.type }}">
+                        <div class="transaction-details">
+                            <p>
+                                <strong>Amount:</strong>
+                                <!-- 'type' ke hisaab se sign (+/-) aur amount dikhao -->
+                                {% if trx_data.type == 'credit' %}
+                                <span class="amount credit">+ ₹{{ trx_data.object.amount }}</span>
+                                {% else %}
+                                <span class="amount debit">- ₹{{ trx_data.object.amount }}</span>
+                                {% endif %}
+                            </p>
+                            <p><strong>Time:</strong> {{ trx_data.object.timestamp|time:"h:i A" }}</p>
+                        </div>
+                        <div class="transaction-items">
+                            <!-- Items ko aache se parse karo -->
+                            <strong>Items:</strong> {{ trx_data.object.items|parse_json_items }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                {% else %}
+                <p>You have no transaction history yet.</p>
+                {% endif %}
+            </div>
+
+            <div id="attendance" class="content-box">
+                <!-- Attendance wala section abhi static hai, isko baad mein dynamic bana sakte hain -->
+                <h2>Attendance</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Total Classes</th>
+                            <th>Classes Attended</th>
+                            <th>Classes Missed</th>
+                            <th>Absence Dates</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td>50</td>
+                            <td>45</td>
+                            <td>5</td>
+                            <td>2025-01-10, ...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="neoCardRecharge" class="content-box">
+                <h2>NeoCard Recharge</h2>
+                <div class="recharge-card">
+                    <h4>Current Balance: ₹{{ student.balance }}</h4>
+                    <p>Enter the amount you want to add to your NeoCard.</p>
+
+                    <form method="post" action="{% url 'initiate_recharge' %}">
+                        {% csrf_token %}
+                        <div class="recharge-form-group">
+                            <label for="recharge-amount">Amount (₹):</label>
+                            <input type="number" id="recharge-amount" name="amount" min="10" placeholder="e.g., 500"
+                                required>
+                        </div>
+                        <button type="submit" class="recharge-button">Proceed to Recharge</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Nayi, simplified JS file ka istemaal -->
+    <script src="{% static 'js/students.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | {{ teacher.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/teachers.css' %}">
+</head>
+
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="top-navbar">
+        <div class="logo">NeoCard</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="{% url 'logout' %}" style="color: #ffb3b3; font-weight: bold;">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="{% static 'assets/images/360_F_360989474_iv2b8GaEPKVD4oKjAZtILmc2mMT7tdZS.jpg' %}"
+                    alt="Teacher Photo" class="teacher-photo-sidebar">
+                <h4>Welcome, {{ teacher.name }}</h4>
+            </div>
+            <ul>
+                <!-- 'onclick' se hum sections ko show/hide karenge -->
+                <li class="active" onclick="showSection('dashboard')"><a href="#">Dashboard</a></li>
+                <li onclick="showSection('attendance')"><a href="#">Mark Attendance</a></li>
+                <li onclick="showSection('grades')"><a href="#">Enter Grades</a></li>
+                <li onclick="showSection('profile')"><a href="#">My Profile</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-content">
+
+            <!-- Section 1: Dashboard (Default) -->
+            <section id="dashboard" class="content-section active">
+                <h2>Dashboard</h2>
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3>My Classes</h3>
+                        <p>You are assigned to teach Class 10A, 11B, and 9C.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Announcements</h3>
+                        <p>Parent-teacher meeting is scheduled for this Friday.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Quick Stats</h3>
+                        <p>Total Students: 120</p>
+                        <p>Overall Attendance: 92%</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Mark Attendance -->
+            <section id="attendance" class="content-section">
+                <h2>Mark Attendance</h2>
+                <p>Attendance marking functionality will be built here.</p>
+                <!-- Yahan par form aayega attendance mark karne ke liye -->
+            </section>
+
+            <!-- Section 3: Enter Grades -->
+            <section id="grades" class="content-section">
+                <h2>Enter Grades</h2>
+                <p>Grade entry functionality will be built here.</p>
+                <!-- Yahan par form aayega grades enter karne ke liye -->
+            </section>
+
+            <!-- Section 4: My Profile -->
+            <section id="profile" class="content-section">
+                <h2>My Profile</h2>
+                <div class="card profile-card">
+                    <h3>Teacher Details</h3>
+                    <ul>
+                        <li><strong>Name:</strong> {{ teacher.name }}</li>
+                        <li><strong>Login ID:</strong> {{ teacher.loginId }}</li>
+                        <li><strong>Email:</strong> {{ teacher.email }}</li>
+                        <li><strong>Subjects:</strong> {{ teacher.subjects }}</li>
+                    </ul>
+                    <a href="{% url 'update_teacher_profile' %}"
+                        style="display: inline-block; margin-top: 20px; padding: 10px 15px; background-color: #4a90e2; color: white; text-decoration: none; border-radius: 5px;">
+                        Update Profile
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Nayi simplified JS file ka link -->
+    <script src="{% static 'js/teachers.js' %}"></script>
+</body>
+
+</html>

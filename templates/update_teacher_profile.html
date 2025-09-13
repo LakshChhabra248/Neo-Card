@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Teacher Profile</title>
+    <!-- Hum signup.css ka hi istemaal kar sakte hain, kyunki design aacha hai -->
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-header">
+            <h2>Update Your Information</h2>
+        </div>
+        <div class="signup-form">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <!-- 'value' attribute mein teacher ka data pehle se bhar do -->
+                        <input type="text" id="name" name="name" value="{{ teacher.name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email ID</label>
+                        <input type="email" id="email" name="email" value="{{ teacher.email }}" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="subjects">Subjects</label>
+                        <input type="text" id="subjects" name="subjects" value="{{ teacher.subjects }}" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="signup-button">Save Changes</button>
+                <a href="{% url 'teachers' %}" style="display: block; text-align: center; margin-top: 15px;">Cancel</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Payment</title>
+    <link rel="stylesheet" href="{% static 'css/students.css' %}">
+</head>
+<body>
+    <div class="container" style="max-width: 600px; text-align:center;">
+        <div class="recharge-card">
+            <h2>Simulated Payment Gateway</h2>
+            <p><strong>Merchant:</strong> NeoCard</p>
+            <p><strong>Customer:</strong> {{ student_name }}</p>
+            <p><strong>Order ID:</strong> {{ order_id }}</p>
+            <hr>
+            <h3>Amount to Pay: ₹{{ amount }}</h3>
+            <p>This is a simulated page. In a real application, you would be redirected to a payment gateway like Razorpay or Paytm.</p>
+            
+            <!-- Yeh form success URL par bhejega -->
+            <form action="{% url 'recharge_success' %}" method="get">
+                <button type="submit" class="recharge-button" style="background-color: #2ecc71;">Simulate Successful Payment</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

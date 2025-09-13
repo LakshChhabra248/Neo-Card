@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Created!</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card" style="text-align: center;">
+            <h2 style="color: #4CAF50;">Account Created Successfully!</h2>
+            <p>Your new Login ID is:</p>
+            <h3 style="background-color: #f0f0f0; padding: 10px; border-radius: 5px;">{{ generated_id }}</h3>
+            <p>Please use this ID to log in.</p>
+            <br>
+            <a href="{% url 'login' %}" class="login-button">Go to Login</a>
+        </div>
+    </div>
+</body>
+</html>
