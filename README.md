@@ -91,6 +91,19 @@ To explore our project and run the demo:
     # pip install -r requirements.txt
     # streamlit run app.py
     ```
+## Meet the Crusaders
+
+This project is the result of the collaborative effort of a passionate and dedicated team of third-year students.
+
+| Name               | Role & Expertise                             | Branch         | GitHub                                       | LinkedIn                                         |
+| ------------------ | -------------------------------------------- | -------------- | -------------------------------------------- | ------------------------------------------------ |
+| **Lakshay Chhabra**  | Team Leader & Lead Developer                 | CSE (AI & ML)  | [LakshayChhabra](https://github.com/LakshayChhabra248)          | [Lakshay Chhabra](https://www.linkedin.com/in/lakshay-chhabra-ai-innovator/)            |
+| Aviral Jain      | Research & Documentation                     | CSE (AI & ML)  | [AviralJain](https://github.com/githubcoding1234)               | [Aviral Jain](https://www.linkedin.com/in/aviral-jain-27018331b/)                |
+| Garvit Chaudhary | Business Model Designer                      | CSE (AI & ML)  | [GarvitChaudhary](https://github.com/garvitchaudhary48-lab)          | [Garvit Chaudhary](#)           |
+| Aamir            | Frontend Developer                           | CSE            | [Aamir](https://github.com/aamir998168)                    | [Aamir](https://www.linkedin.com/in/aamir-sahab-0b6153326/)                      |
+| Aadishri         | UI Designer                                  | CSE (AI & ML)       | [Aadishri](https://github.com/adishri-ab)                 | [Aadishri](https://www.linkedin.com/in/aadishri-abrol-796b04295/)                   |
+| Anishka Sharma   | Presenter, Pitcher          | CSE     | [AnishkaSharma](https://github.com/sharmaanishka507-code)            | [Anishka Sharma](https://www.linkedin.com/in/anishka-sharma-010237308/)             |
+
 
 ---
 Made with ❤️ and lots of code by **Coding Crusaders**.
