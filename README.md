@@ -55,7 +55,7 @@ Explore the power of Neo-Card by setting up our project and running the live har
 *   Python (3.9+)
 *   Django (4.x) & other dependencies from `requirements.txt`
 *   Streamlit
-*   A compatible NFC Card Reader (e.g., ACR122U)
+*   A compatible NFC Card Reader (We're using PN532 RFID Reader)
 
 #### **1. Backend Setup (Django)**
 
