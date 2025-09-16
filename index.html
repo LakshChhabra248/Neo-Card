@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo-Card Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #10101a;
+            --secondary-bg: #181828;
+            --accent-color: #03e9f4;
+            --text-color: #e0e0e0;
+            --label-color: #a0a0c0;
+            --border-color: rgba(3, 233, 244, 0.3);
+            --glow-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color), 0 0 25px var(--accent-color);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: background-color 0.3s;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            background-color: var(--secondary-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- Form Section --- */
+        .form-section {
+            flex: 1;
+            padding: 2.5rem;
+            background-color: var(--secondary-bg);
+        }
+
+        .form-section h1 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px var(--accent-color);
+        }
+
+        .form-section p {
+            margin-bottom: 2rem;
+            color: var(--label-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--label-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 8px rgba(3, 233, 244, 0.5);
+        }
+        
+        /* --- Preview Section --- */
+        .preview-section {
+            flex: 1;
+            background: linear-gradient(45deg, #181828, #1c1c30);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem;
+            perspective: 1000px;
+        }
+
+        .neo-card {
+            width: 350px;
+            height: 550px;
+            background: rgba(16, 16, 26, 0.6);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--glow-shadow);
+            transition: transform 0.4s ease-out, box-shadow 0.4s;
+            transform-style: preserve-3d;
+        }
+
+        .neo-card:hover {
+            transform: rotateY(5deg) rotateX(10deg) scale(1.02);
+            box-shadow: 0 0 10px var(--accent-color), 0 0 30px var(--accent-color), 0 0 50px var(--accent-color);
+        }
+
+        .profile-pic {
+            position: relative;
+            cursor: pointer;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+        }
+        
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(3, 233, 244, 0.6);
+            transition: transform 0.3s;
+        }
+
+        .profile-pic:hover img {
+            transform: scale(1.05);
+        }
+        
+        #photo-upload {
+            display: none;
+        }
+
+        .card-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+            min-height: 2.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            min-height: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+            word-wrap: break-word;
+            min-height: 1.2rem;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .qr-code {
+            margin-top: 2rem;
+        }
+        
+        #qr-code-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 8px;
+            border-radius: 8px;
+            margin: 0 auto;
+            width: 116px;
+            height: 116px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            .neo-card {
+                transform: none !important;
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding: 1rem;
+            }
+            .form-section, .preview-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Input Form Section -->
+        <div class="form-section">
+            <h1>Neo-Card Creator</h1>
+            <p>Fill in your details to generate your digital business card.</p>
+
+            <form id="card-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name-input" placeholder="e.g., Laksh Chhabra">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title / Profession</label>
+                    <input type="text" id="title-input" placeholder="e.g., Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email-input" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn Profile URL</label>
+                    <input type="url" id="linkedin-input" placeholder="https://linkedin.com/in/yourprofile">
+                </div>
+                 <div class="form-group">
+                    <label for="github">GitHub Profile URL</label>
+                    <input type="url" id="github-input" placeholder="https://github.com/yourusername">
+                </div>
+                 <div class="form-group">
+                    <label for="website">Personal Website/Portfolio</label>
+                    <input type="url" id="website-input" placeholder="https://your.website">
+                </div>
+            </form>
+        </div>
+        
+        <!-- Live Preview Section -->
+        <div class="preview-section">
+            <div class="neo-card">
+                <div class="profile-pic" id="profile-pic-container">
+                    <input type="file" id="photo-upload" accept="image/*">
+                    <img src="https://i.ibb.co/7z3A1sB/avatar-placeholder.png" alt="Profile Picture" id="profile-img-preview">
+                </div>
+                <h2 class="card-name" id="name-preview">Your Name</h2>
+                <p class="card-title" id="title-preview">Your Title</p>
+                <div class="social-links">
+                    <a href="#" id="email-preview">your@email.com</a>
+                    <a href="#" id="linkedin-preview">LinkedIn Profile</a>
+                    <a href="#" id="github-preview">GitHub Profile</a>
+                </div>
+                <div class="qr-code">
+                    <div id="qr-code-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Element References ---
+            const form = document.getElementById('card-form');
+            const inputs = {
+                name: document.getElementById('name-input'),
+                title: document.getElementById('title-input'),
+                email: document.getElementById('email-input'),
+                linkedin: document.getElementById('linkedin-input'),
+                github: document.getElementById('github-input'),
+                website: document.getElementById('website-input'),
+            };
+            const previews = {
+                name: document.getElementById('name-preview'),
+                title: document.getElementById('title-preview'),
+                email: document.getElementById('email-preview'),
+                linkedin: document.getElementById('linkedin-preview'),
+                github: document.getElementById('github-preview'),
+            };
+            const photoUpload = document.getElementById('photo-upload');
+            const profilePicContainer = document.getElementById('profile-pic-container');
+            const profileImgPreview = document.getElementById('profile-img-preview');
+            const qrCodeContainer = document.getElementById('qr-code-container');
+
+            // --- Initial Placeholders ---
+            const placeholders = {
+                name: 'Your Name',
+                title: 'Your Title',
+                email: 'your@email.com',
+                linkedin: 'LinkedIn Profile',
+                github: 'GitHub Profile',
+            };
+
+            // --- QR Code Initialization ---
+            let qrcode = new QRCode(qrCodeContainer, {
+                width: 100,
+                height: 100,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // --- Function to Generate vCard and QR Code ---
+            function generateVCard() {
+                const vCard = [
+                    'BEGIN:VCARD',
+                    'VERSION:3.0',
+                    `FN:${inputs.name.value}`,
+                    `TITLE:${inputs.title.value}`,
+                    `EMAIL:${inputs.email.value}`,
+                    `URL;type=linkedin:${inputs.linkedin.value}`,
+                    `URL;type=github:${inputs.github.value}`,
+                    `URL;type=website:${inputs.website.value}`,
+                    'END:VCARD'
+                ].join('\n');
+                
+                qrCodeContainer.innerHTML = ''; // Clear previous QR code
+                qrcode.makeCode(vCard);
+            }
+
+            // --- Function to Update Preview ---
+            function updatePreview() {
+                // Update text content
+                previews.name.textContent = inputs.name.value || placeholders.name;
+                previews.title.textContent = inputs.title.value || placeholders.title;
+                previews.email.textContent = inputs.email.value || placeholders.email;
+                
+                // Update social links
+                previews.linkedin.textContent = inputs.linkedin.value ? inputs.linkedin.value.replace(/^(https?:\/\/)?(www\.)?/, '') : placeholders.linkedin;
+                previews.linkedin.href = inputs.linkedin.value || '#';
+
+                previews.github.textContent = inputs.github.value ? inputs.github.value.replace(/^(https?:\/\/)?(www\.)?/, '') : placeholders.github;
+                previews.github.href = inputs.github.value || '#';
+
+                // Regenerate QR Code
+                generateVCard();
+            }
+
+            // --- Event Listeners ---
+            
+            // Listen for input on all form fields
+            form.addEventListener('input', updatePreview);
+
+            // Listen for profile picture upload
+            profilePicContainer.addEventListener('click', () => photoUpload.click());
+            photoUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        profileImgPreview.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // --- Initial Call ---
+            updatePreview();
+        });
+    </script>
+</body>
+</html>

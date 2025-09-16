@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo-School Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #10101a;
+            --secondary-bg: #181828;
+            --sidebar-bg: #1c1c30;
+            --accent-color: #f39c12; /* Orange accent */
+            --text-color: #e0e0e0;
+            --text-secondary: #a0a0c0;
+            --border-color: rgba(243, 156, 18, 0.2);
+            --glow-shadow: 0 0 8px var(--accent-color);
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header { display: flex; align-items: center; gap: 10px; margin-bottom: 2.5rem; }
+        .sidebar-header .logo-icon { font-size: 2rem; color: var(--accent-color); text-shadow: var(--glow-shadow); }
+        .sidebar-header h1 { font-size: 1.5rem; font-weight: 600; color: #fff; }
+
+        .nav-menu a {
+            display: flex; align-items: center; padding: 1.1rem 1rem; color: var(--text-secondary);
+            text-decoration: none; border-radius: 8px; margin-bottom: 0.5rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-menu a i { width: 35px; font-size: 1.1rem; margin-right: 0.8rem; text-align: center; }
+        .nav-menu a.active, .nav-menu a:hover { background-color: rgba(243, 156, 18, 0.1); color: var(--accent-color); }
+
+        /* --- Main Content & Shared Styles --- */
+        .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .header h2 { font-size: 2rem; font-weight: 600; }
+        .user-profile { display: flex; align-items: center; gap: 1rem; }
+        .user-profile img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); }
+
+        .data-table-container {
+            background-color: var(--secondary-bg); padding: 1.5rem; margin-top: 2rem;
+            border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow);
+        }
+        .data-table-container h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        th { color: var(--text-secondary); font-weight: 500; }
+        tbody tr:hover { background-color: var(--primary-bg); }
+        .status-present, .status-active, .status-on-route { color: var(--success-color); font-weight: 600; }
+        .status-absent, .status-inactive, .status-due { color: var(--danger-color); font-weight: 600; }
+        .status-delayed { color: var(--warning-color); font-weight: 600; }
+
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* --- Admin Dashboard Enhancements --- */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+        .widget {
+            background-color: var(--secondary-bg); padding: 1.5rem; border-radius: 12px;
+            border: 1px solid var(--border-color); box-shadow: var(--card-shadow); cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s; grid-column: span 12;
+        }
+        @media (min-width: 600px) { .widget { grid-column: span 6; } }
+        @media (min-width: 900px) { .widget { grid-column: span 4; } }
+        
+        .widget:hover { transform: translateY(-5px); box-shadow: var(--glow-shadow); }
+        .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .widget-header h3 { font-size: 1rem; color: var(--text-secondary); }
+        .widget-header i { font-size: 1.5rem; color: var(--accent-color); }
+        .widget-value { font-size: 2.5rem; font-weight: 600; color: #fff; }
+        
+        .alert-widget { grid-column: span 12; background-color: rgba(220, 53, 69, 0.1); border-color: var(--danger-color); cursor: default; }
+        @media (min-width: 900px) { .alert-widget { grid-column: span 6; } }
+        .alert-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; color: var(--danger-color); }
+        .alert-item i { animation: pulse 1.5s infinite; }
+
+        .calendar-widget { grid-column: span 12; }
+        @media (min-width: 900px) { .calendar-widget { grid-column: span 6; } }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+        .calendar-grid div { padding: 5px; border-radius: 4px; }
+        .calendar-grid .day-name { font-weight: 600; color: var(--text-secondary); }
+        .calendar-grid .event-day { background-color: var(--accent-color); color: #000; font-weight: 600; }
+        
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        .class-tabs { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--border-color); margin-bottom: 1.5rem; }
+        .class-tab { padding: 0.75rem 1.5rem; cursor: pointer; border-radius: 8px 8px 0 0; }
+        .class-tab.active { background-color: var(--secondary-bg); color: var(--accent-color); border: 1px solid var(--border-color); border-bottom: 1px solid var(--secondary-bg); }
+        .class-content { display: none; }
+        .class-content.active { display: block; }
+        .student-name-clickable { cursor: pointer; color: var(--accent-color); font-weight: 500; }
+        .student-name-clickable:hover { text-decoration: underline; }
+        
+        /* --- Teacher Dashboard --- */
+        .teacher-info-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .teacher-info-card { background-color: var(--secondary-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .teacher-info-card img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--accent-color); margin-bottom: 1rem; }
+        .teacher-info-card h4 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .teacher-info-card p { color: var(--text-secondary); }
+
+        /* --- Student Dashboard --- */
+        .student-profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .profile-card {
+            background-color: var(--secondary-bg); padding: 2rem; border-radius: 12px;
+            border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center;
+        }
+        .profile-card img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--accent-color); margin-bottom: 1rem; }
+        .profile-card h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .profile-card p { color: var(--text-secondary); margin-bottom: 0.25rem; }
+        .download-btn { color: var(--accent-color); cursor: pointer; }
+
+        /* --- Modal Styling --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: var(--secondary-bg); padding: 2rem; border-radius: 15px;
+            border: 1px solid var(--border-color); width: 90%; max-width: 800px; /* Wider for student details */
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .modal-close-btn { background: none; border: none; color: var(--text-secondary); font-size: 1.8rem; cursor: pointer; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; }
+        .btn-primary { background-color: var(--accent-color); color: #000; border: none; }
+        
+        /* Modal-specific layouts */
+        .student-detail-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; }
+        .transaction-form-grid { display: grid; gap: 1rem; }
+        .transaction-form-grid label { font-weight: 500; color: var(--text-secondary); }
+        .transaction-form-grid select, .transaction-form-grid input { width: 100%; padding: 0.75rem; background-color: var(--primary-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header"> <i class="fa-solid fa-school logo-icon"></i> <h1>Neo-School</h1> </div>
+        <div class="nav-menu">
+            <a href="#" class="nav-link active" data-page="admin-dashboard-page"><i class="fa-solid fa-user-shield"></i><span>Admin Dashboard</span></a>
+            <a href="#" class="nav-link" data-page="teacher-dashboard-page"><i class="fa-solid fa-chalkboard-user"></i><span>Teacher Dashboard</span></a>
+            <a href="#" class="nav-link" data-page="student-dashboard-page"><i class="fa-solid fa-user-graduate"></i><span>Student Dashboard</span></a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- PAGE 1: Admin Dashboard -->
+        <section id="admin-dashboard-page" class="page active">
+            <header class="header">
+                <h2>Admin Dashboard</h2>
+                <div class="user-profile"><span>Admin Account</span><img src="https://placehold.co/100x100/orange/white?text=A" alt="Admin"></div>
+            </header>
+            
+            <div class="dashboard-grid">
+                <div class="widget" id="students-present-btn"><div class="widget-header"><h3>Students Present</h3><i class="fa-solid fa-user-check"></i></div><div class="widget-value">425 <span>/ 500</span></div></div>
+                <div class="widget" id="cashless-transactions-btn"><div class="widget-header"><h3>Transactions</h3><i class="fa-solid fa-wallet"></i></div><div class="widget-value">$1,250</div></div>
+                <div class="widget" id="library-dues-btn"><div class="widget-header"><h3>Library Dues</h3><i class="fa-solid fa-book-open"></i></div><div class="widget-value">15</div></div>
+                <div class="widget alert-widget"><div class="widget-header"><h3>School Alerts</h3></div><div class="alert-item"><i class="fa-solid fa-bus"></i> <strong>Bus-07 (South Route) is running 15 minutes late.</strong></div><div class="alert-item"><i class="fa-solid fa-triangle-exclamation"></i> <strong>Emergency fire drill scheduled for 2:00 PM today.</strong></div></div>
+                <div class="widget calendar-widget"><div class="widget-header"><h3>Events Calendar - September</h3></div><div class="calendar-grid"><div class="day-name">Su</div><div class="day-name">Mo</div><div class="day-name">Tu</div><div class="day-name">We</div><div class="day-name">Th</div><div class="day-name">Fr</div><div class="day-name">Sa</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div class="event-day">13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div class="event-day">24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div></div></div>
+                <div class="widget" style="grid-column: span 12;"><div class="widget-header"><h3>Staff Overview</h3></div><div class="widget-value">35 <span style="font-size: 1rem; color: var(--text-secondary);">On Duty</span> / 4 <span style="font-size: 1rem; color: var(--text-secondary);">On Leave</span></div></div>
+            </div>
+
+            <div class="data-table-container" id="student-roster-section">
+                <h3>Class-wise Student Roster</h3>
+                <div class="class-tabs">
+                    <div class="class-tab active" data-class="class9">Class 9</div><div class="class-tab" data-class="class10">Class 10</div><div class="class-tab" data-class="class11">Class 11</div><div class="class-tab" data-class="class12">Class 12</div>
+                </div>
+                <div id="class9-content" class="class-content active"><table><thead><tr><th>ID</th><th>Name</th><th>Parent Contact</th><th>Status</th></tr></thead><tbody><tr><td>#1015</td><td class="student-name-clickable" data-student-id="1015">Charlie Brown</td><td>(555) 246-8135</td><td class="status-active">Active</td></tr></tbody></table></div>
+                <div id="class10-content" class="class-content"><table><thead><tr><th>ID</th><th>Name</th><th>Parent Contact</th><th>Status</th></tr></thead><tbody><tr><td>#1024</td><td class="student-name-clickable" data-student-id="1024">Alice Johnson</td><td>(555) 123-4567</td><td class="status-active">Active</td></tr></tbody></table></div>
+                <div id="class11-content" class="class-content"><table><thead><tr><th>ID</th><th>Name</th><th>Parent Contact</th><th>Status</th></tr></thead><tbody><tr><td>#1138</td><td class="student-name-clickable" data-student-id="1138">Diana Miller</td><td>(555) 369-1478</td><td class="status-inactive">Inactive</td></tr></tbody></table></div>
+                <div id="class12-content" class="class-content"><table><thead><tr><th>ID</th><th>Name</th><th>Parent Contact</th><th>Status</th></tr></thead><tbody><tr><td>#1089</td><td class="student-name-clickable" data-student-id="1089">Bob Williams</td><td>(555) 987-6543</td><td class="status-active">Active</td></tr></tbody></table></div>
+            </div>
+
+            <div class="data-table-container" id="library-management-section">
+                <h3>Library Management</h3>
+                <table><thead><tr><th>Book ID</th><th>Student Name</th><th>Due Date</th><th>Fine</th><th>Status</th></tr></thead><tbody><tr><td>#B-502</td><td>Bob Williams</td><td>2024-09-20</td><td>$0.00</td><td>On Time</td></tr><tr><td>#B-113</td><td>Alice Johnson</td><td>2024-09-12</td><td>$2.50</td><td class="status-due">Due</td></tr></tbody></table>
+            </div>
+            <div class="data-table-container"><h3>Bus & Transport Data</h3><table><thead><tr><th>Bus No.</th><th>Route</th><th>Driver</th><th>Live Status</th></tr></thead><tbody><tr><td>Bus-04</td><td>North Route</td><td>Mr. David</td><td class="status-on-route">On Route</td></tr><tr><td>Bus-07</td><td>South Route</td><td>Ms. Carol</td><td class="status-delayed">Delayed</td></tr></tbody></table></div>
+        </section>
+
+        <!-- PAGE 2: Teacher Dashboard -->
+        <section id="teacher-dashboard-page" class="page">
+            <header class="header"><h2>Teacher Dashboard</h2><div class="user-profile"><span>Ms. Evelyn Reed</span><img src="https://placehold.co/100x100/orange/white?text=E" alt="Teacher"></div></header>
+            <div class="teacher-info-grid"><div class="teacher-info-card" style="align-items: center;"><img src="https://placehold.co/100x100/orange/white?text=E" alt="Teacher"><h4>Ms. Evelyn Reed</h4><p><strong>Subject:</strong> Physics</p><p><strong>Class:</strong> 12-C</p></div><div class="teacher-info-card"><h3>Today's Schedule</h3><p><strong>09:00 AM:</strong> Class 12-C (Physics)</p><p><strong>11:00 AM:</strong> Class 11-A (Lab)</p><p><strong>02:00 PM:</strong> Staff Meeting</p></div></div>
+            <div class="data-table-container"><h3>Class 12-C Attendance</h3><table><thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Time</th></tr></thead><tbody><tr><td>#1089</td><td>Bob Williams</td><td class="status-present">Present</td><td>08:30 AM</td></tr><tr><td>#1215</td><td>Henry Wilson</td><td class="status-absent">Absent</td><td>-</td></tr></tbody></table></div>
+            <div class="data-table-container"><h3>Teacher Report</h3><img src="https://placehold.co/600x400?text=S/orange/white" style="width:100%; border-radius: 8px;" alt="Report"></div>
+        </section>
+
+        <!-- PAGE 3: Student Dashboard -->
+        <section id="student-dashboard-page" class="page">
+             <header class="header"><h2>Student Dashboard</h2><div class="user-profile" id="student-profile-header"></div></header>
+             <div class="student-profile-grid"><div class="profile-card" id="student-profile-card"></div><div class="data-table-container"><h3>My Library Record</h3><table id="student-library-table"></table></div></div>
+             <div class="data-table-container"><h3>Transaction History</h3><table id="student-transactions-table"></table></div>
+             <div class="data-table-container"><h3>My Documents</h3><table id="student-documents-table"></table></div>
+        </section>
+    </main>
+    
+    <!-- MODAL: Cashless Transactions -->
+    <div class="modal-overlay" id="transactions-modal">
+        <div class="modal-content" style="max-width: 500px;"><div class="modal-header"><h3>New Transaction</h3><button class="modal-close-btn">&times;</button></div><div class="modal-body"><div class="transaction-form-grid"><label for="student-select">Select Student</label><select id="student-select"></select><label for="amount-input">Amount ($)</label><input type="number" id="amount-input" placeholder="e.g., 5.75"><button id="confirm-transaction-btn" class="btn btn-primary" style="margin-top: 1rem;">Confirm Transaction</button></div></div></div>
+    </div>
+    
+    <!-- MODAL: Student Details -->
+    <div class="modal-overlay" id="student-detail-modal">
+        <div class="modal-content"><div class="modal-header"><h3 id="student-modal-title">Student Details</h3><button class="modal-close-btn">&times;</button></div><div class="modal-body student-detail-grid"><div id="student-detail-info"></div><div id="student-detail-transactions"><h4>Transaction Record</h4><table><tbody id="transaction-history-body"></tbody></table></div></div></div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const studentData = {
+            "1015": { name: "Charlie Brown", class: "9-B", parent: "(555) 246-8135", bus: "North Route", status: "Active", transactions: [{ date: '2024-09-15', loc: 'Stationery', amt: '$12.50' }] },
+            "1024": { name: "Alice Johnson", class: "10-A", parent: "(555) 123-4567", bus: "North Route", status: "Active", transactions: [{ date: '2024-09-15', loc: 'Canteen', amt: '$5.75' }, { date: '2024-09-14', loc: 'Book Store', amt: '$15.00' }], documents: [{ name: 'Report Card - Term 1', type: 'PDF' }, { name: 'Science Olympiad Certificate', type: 'Certificate' }], library: [{ book: 'History of Time', due: '2024-09-12', status: 'Due'}] },
+            "1138": { name: "Diana Miller", class: "11-A", parent: "(555) 369-1478", bus: "East Route", status: "Inactive", transactions: [] },
+            "1089": { name: "Bob Williams", class: "12-C", parent: "(555) 987-6543", bus: "South Route", status: "Active", transactions: [{ date: '2024-09-15', loc: 'Canteen', amt: '$6.00' }] }
+        };
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const classTabs = document.querySelectorAll('.class-tab');
+        const classContents = document.querySelectorAll('.class-content');
+        
+        navLinks.forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); const t=link.dataset.page; navLinks.forEach(l=>l.classList.remove("active")); link.classList.add("active"); pages.forEach(p=>p.classList.remove("active")); document.getElementById(t).classList.add("active"); }); });
+        classTabs.forEach(tab => { tab.addEventListener('click', () => { const t=tab.dataset.class; classTabs.forEach(tb=>tb.classList.remove("active")); tab.classList.add("active"); classContents.forEach(c=>c.classList.remove("active")); document.getElementById(t+"-content").classList.add("active"); }); });
+
+        document.getElementById('students-present-btn').addEventListener('click', () => document.getElementById('student-roster-section').scrollIntoView());
+        document.getElementById('library-dues-btn').addEventListener('click', () => document.getElementById('library-management-section').scrollIntoView());
+
+        // Modal Handling
+        const transactionModal = document.getElementById('transactions-modal');
+        const studentDetailModal = document.getElementById('student-detail-modal');
+        document.getElementById('cashless-transactions-btn').addEventListener('click', () => {
+            populateStudentSelector();
+            transactionModal.classList.add('active');
+        });
+        document.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => {
+            transactionModal.classList.remove('active');
+            studentDetailModal.classList.remove('active');
+        }));
+
+        // Student Roster Click Interactivity
+        document.querySelectorAll('.student-name-clickable').forEach(el => el.addEventListener('click', (e) => {
+            const studentId = e.target.dataset.studentId;
+            const data = studentData[studentId];
+            if (!data) return;
+            
+            document.getElementById('student-modal-title').textContent = `${data.name}'s Details`;
+            document.getElementById('student-detail-info').innerHTML = `<p><strong>ID:</strong> #${studentId}</p><p><strong>Class:</strong> ${data.class}</p><p><strong>Parent:</strong> ${data.parent}</p><p><strong>Bus Route:</strong> ${data.bus}</p><p><strong>Status:</strong> <span class="status-${data.status.toLowerCase()}">${data.status}</span></p>`;
+            const txBody = document.getElementById('transaction-history-body');
+            txBody.innerHTML = '<tr><th>Date</th><th>Location</th><th>Amount</th></tr>'; // Header for table
+            if (data.transactions.length > 0) data.transactions.forEach(tx => txBody.innerHTML += `<tr><td>${tx.date}</td><td>${tx.loc}</td><td>${tx.amt}</td></tr>`);
+            else txBody.innerHTML += '<tr><td colspan="3">No transactions</td></tr>';
+
+            studentDetailModal.classList.add('active');
+        }));
+
+        // Populate student selector in transaction modal
+        function populateStudentSelector() {
+            const selectEl = document.getElementById('student-select');
+            selectEl.innerHTML = '';
+            for (const id in studentData) {
+                selectEl.innerHTML += `<option value="${id}">${studentData[id].name}</option>`;
+            }
+        }
+        
+        // Transaction modal button functionality
+        document.getElementById('confirm-transaction-btn').addEventListener('click', () => {
+            const studentId = document.getElementById('student-select').value;
+            const amount = document.getElementById('amount-input').value;
+            if (studentId && amount) {
+                alert(`Transaction of $${amount} processed for ${studentData[studentId].name}.`);
+                transactionModal.classList.remove('active');
+            } else {
+                alert('Please select a student and enter an amount.');
+            }
+        });
+
+        function loadStudentDashboard(studentId) {
+            const student = studentData[studentId];
+            if (!student) return;
+
+            document.getElementById('student-profile-header').innerHTML = `<span>${student.name}</span><img src="https://placehold.co/100x100/orange/white?text=${student.name.charAt(0)}" alt="Student">`;
+            document.getElementById('student-profile-card').innerHTML = `<img src="https://placehold.co/120x120/orange/white?text=${student.name.charAt(0)}" alt="Student"><h3>${student.name}</h3><p><strong>ID:</strong> #${studentId} | <strong>Class:</strong> ${student.class}</p><p><strong>Bus Route:</strong> ${student.bus}</p>`;
+            
+            const transactionsTable = document.getElementById('student-transactions-table');
+            let txHTML = '<thead><tr><th>ID</th><th>Date</th><th>Location</th><th>Amount</th></tr></thead><tbody>';
+            if (student.transactions) student.transactions.forEach(tx => { txHTML += `<tr><td>${tx.id || 'N/A'}</td><td>${tx.date}</td><td>${tx.loc}</td><td>${tx.amt}</td></tr>`; });
+            transactionsTable.innerHTML = txHTML + '</tbody>';
+            
+            const documentsTable = document.getElementById('student-documents-table');
+            let docHTML = '<thead><tr><th>Document</th><th>Type</th><th>Action</th></tr></thead><tbody>';
+            if (student.documents) student.documents.forEach(doc => { docHTML += `<tr><td>${doc.name}</td><td>${doc.type}</td><td><i class="fa-solid fa-download download-btn"></i></td></tr>`; });
+            documentsTable.innerHTML = docHTML + '</tbody>';
+
+            const libraryTable = document.getElementById('student-library-table');
+            let libHTML = '<thead><tr><th>Book</th><th>Due Date</th><th>Status</th></tr></thead><tbody>';
+            if (student.library) student.library.forEach(lib => { libHTML += `<tr><td>${lib.book}</td><td>${lib.due}</td><td class="status-${lib.status.toLowerCase()}">${lib.status}</td></tr>`; });
+            libraryTable.innerHTML = libHTML + '</tbody>';
+        }
+        
+        loadStudentDashboard("1024");
+    });
+    </script>
+</body>
+</html>
